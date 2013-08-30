@@ -1,3 +1,6 @@
+open Core_kernel.Std
+open Caml
+
 (* Basic GDB types *)
 type addr = int64
 type gdb_stream

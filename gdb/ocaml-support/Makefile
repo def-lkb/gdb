@@ -1,6 +1,5 @@
 CC=gcc
-OCAMLC=ocamlc
-OCAMLOPT=ocamlopt
+OCAMLFIND=ocamlfind
 
 CFLAGS='-I .. -I ../common -I ../../include -ggdb'
 SRC=gdb_ocaml_support.c ml_gdb.c gdb.ml gdb_ocaml_support.ml
@@ -17,8 +16,8 @@ clean:
 
 .PHONY: bytecode
 bytecode:
-	$(OCAMLC) -output-obj -o $(TARGET_LIB) -ccopt $(CFLAGS) \
-	  dynlink.cma bigarray.cma -runtime-variant _shared \
+	$(OCAMLFIND) ocamlc -output-obj -o $(TARGET_LIB) -ccopt $(CFLAGS) \
+	  -package dynlink,bigarray,core_kernel -thread -linkpkg -runtime-variant _shared \
 	  $(SRC)
 
 ## Native support need PIC-enabled toolchain, e.g. configured with:
